@@ -1,0 +1,26 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: large;
+}
+
+button {
+    padding: 4px;
+    border: 1px solid black;
+    border-radius: 2px;
+    background-color: transparent;
+    text-align: center;
+    margin: 8px;
+}
+
+textarea {
+    border-radius: 2px;
+    border: 1px solid black;
+    padding: 4px;
+    max-width: calc(100vw - 8px - 16px);
+    min-width: calc(100vw - 8px - 16px);
+    min-height: 10vh;
+}
+
+#container {
+    text-align: center;
+}
