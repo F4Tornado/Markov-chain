@@ -9,9 +9,9 @@
 
 <body>
     <div id="container">
-        <textarea placeholder="Corpus (space seperated)"
-            id="corpus">mrkjri vinəs rθ marz dʒupɪtr satrn jrainəs</textarea><br>
-        <button onclick="generate()">Generate</button><br>
+        <textarea placeholder="Corpus (space seperated)" id="corpus" spellcheck="false"></textarea><br>
+        <input placeholder="start" id="start"><br>
+        <input type="button" onclick="generate()" value="generate"><br>
         <span id="words"></span>
     </div>
     <script src="sketch.js"></script>

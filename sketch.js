@@ -49,8 +49,13 @@ function generate() {
         start.push(corpus[i][0]);
     }
 
-    // Generate a random start to a word
-    word.push(start[Math.floor(start.length * Math.random())]);
+    // Generate a random start to a word, unless on is provided
+    let startIn = document.getElementById("start").value;
+    if (startIn) {
+        word = startIn.split("");
+    } else {
+        word.push(start[Math.floor(start.length * Math.random())]);
+    }
 
     // Add letters until coming upon a " "
     while (word[word.length - 1] !== " ") {
