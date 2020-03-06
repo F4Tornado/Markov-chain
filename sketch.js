@@ -66,3 +66,12 @@ function generate() {
     word.pop();
     document.getElementById("words").innerHTML = word.join("");
 }
+
+window.onload = () => {
+    if (localStorage.getItem("corpus")) {
+        document.getElementById("corpus").value = localStorage.getItem("corpus");
+    }
+    document.getElementById("corpus").onchange = () => {
+        localStorage.setItem("corpus", document.getElementById("corpus").value)
+    }
+}
