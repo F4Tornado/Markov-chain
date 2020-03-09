@@ -17,8 +17,14 @@ function generate() {
 
         // Generate a random start to a word, unless one is provided
         let startIn = document.getElementById("start").value;
-        if (startIn && startIn.length >= order) {
-            word = startIn.split("");
+        if (startIn) {
+            if (startIn.length >= order) {
+                word = startIn.split("");
+            } else {
+                while (!arraysEqual(word.slice(0, startIn.length), startIn.split(""))) {
+                    word = start[Math.floor(start.length * Math.random())].split("");
+                }
+            }
         } else {
             word = start[Math.floor(start.length * Math.random())].split("");
         }
@@ -93,4 +99,14 @@ function calculateChances() {
     for (let i = 0; i < corpus.length; i++) {
         start.push(corpus[i].slice(0, order));
     }
+}
+
+function arraysEqual(a, b) {
+    if (a.length != b.length) return false;
+
+    for (let i = 0; i < a.length; a++) {
+        if (a[i] != b[i]) return false;
+    }
+
+    return true;
 }
