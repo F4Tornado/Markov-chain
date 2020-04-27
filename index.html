@@ -11,7 +11,10 @@
     <div id="container">
         <textarea placeholder="Corpus (space seperated)" id="corpus" spellcheck="false"></textarea><br>
         <input placeholder="start" id="start"> <input type="number" value="1" placeholder="Amount of words"
-            id="amt"><input type="number" placeholder="order" value="2" id="order"><br>
+            id="amt"><input type="number" placeholder="order" value="2" id="order">
+        <input type="checkbox" id="backwards"
+            title="Generate the words from end to beginning instead of beginning to end. Can be used to generate words with a specified ending"><label
+            for="backwards">- Backwards mode</label><br>
         <input type="button" onclick="generate()" value="generate"><br>
         <span id="words"></span>
     </div>

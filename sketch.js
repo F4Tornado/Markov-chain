@@ -6,6 +6,7 @@ let charsObj = {
 let start = [];
 let word = [];
 let order = 2;
+let backwards = false;
 
 function generate() {
     let words = [];
@@ -20,6 +21,11 @@ function generate() {
         if (startIn) {
             if (startIn.length >= order) {
                 word = startIn.split("");
+
+                // Flip the provided start if backwards is checked
+                if (backwards) {
+                    word = word.reverse();
+                }
             } else {
                 while (!arraysEqual(word.slice(0, startIn.length), startIn.split(""))) {
                     word = start[Math.floor(start.length * Math.random())].split("");
@@ -34,15 +40,24 @@ function generate() {
             word.push(charChances[word.slice(word.length - order, word.length).join("")][Math.floor(Math.random() * charChances[word.slice(word.length - order, word.length).join("")].length)]);
         }
 
-        // Remove the excess " ", convert to string, and add to words array
+        // Remove the excess " "
         word.pop();
+
+        // If backwards is on, then the word is backward and needs to be flipped back to forwards
+        if (backwards) {
+            word = word.reverse();
+        }
+
+        // Convert the word to a string and put it into the list of words
         words.push(word.join(""));
     }
 
+    // Put the words generated onto the screen
     document.getElementById("words").innerHTML = words.join(", ");
 }
 
 window.onload = () => {
+    backwards = document.getElementById("backwards").checked;
     if (localStorage.getItem("corpus")) {
         document.getElementById("corpus").value = localStorage.getItem("corpus");
     }
@@ -52,6 +67,16 @@ window.onload = () => {
     }
     document.getElementById("order").onchange = () => {
         order = parseInt(document.getElementById("order").value);
+        calculateChances();
+    }
+    document.getElementById("backwards").onchange = () => {
+        backwards = document.getElementById("backwards").checked;
+
+        if (backwards) {
+            document.getElementById("start").placeholder = "end";
+        } else {
+            document.getElementById("start").placeholder = "start";
+        }
         calculateChances();
     }
     calculateChances();
@@ -67,7 +92,15 @@ function calculateChances() {
     start = [];
 
     // Get the list of characters the user is using & initialize the variables
-    let corpus = document.getElementById("corpus").value.split(" ");
+    let corpus = document.getElementById("corpus").value;
+
+    // If backwards is checked, reverse the corpus
+    if (backwards) {
+        corpus = corpus.split("").reverse().join("");
+    }
+
+    corpus = corpus.split(" ");
+
     for (let i = 0; i < corpus.length; i++) {
         for (let j = 0; j < corpus[i].length; j++) {
             // console.log(corpus[i].slice(j, j + order).length);
@@ -99,6 +132,7 @@ function calculateChances() {
     for (let i = 0; i < corpus.length; i++) {
         start.push(corpus[i].slice(0, order));
     }
+
 }
 
 function arraysEqual(a, b) {
